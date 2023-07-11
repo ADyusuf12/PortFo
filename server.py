@@ -3,8 +3,11 @@ from markupsafe import escape
 import csv
 
 app = Flask(__name__)
-
 print(__name__)
+
+@app.route('/')
+def my_home():
+	return render_template('index.html')
 
 @app.route('/<string:page_name>')
 def html_page(page_name):
@@ -18,7 +21,7 @@ def write_to_file(data):
 		file = database.write(f'\n{email}, {subject}, {message}')
 
 def write_to_csv(data):
-	with open('./database.csv', newline='', mode='a') as database2:
+	with open('./PortFo/database.csv', newline='', mode='a') as database2:
 		email = data["email"]
 		subject = data["subject"]
 		message = data["message"]
